@@ -14,7 +14,7 @@ import { UserEditorComponent } from './page/user-editor/user-editor.component';
     AppComponent,
     NavbarComponent,
     UserListComponent,
-    UserEditorComponent
+    UserEditorComponent,
   ],
   imports: [
     BrowserModule,

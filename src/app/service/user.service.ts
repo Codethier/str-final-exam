@@ -35,6 +35,9 @@ export class UserService {
    * Delete a user from the database.
    * The method is: this.http.delete
    */
+  delete(id: number): void {
+    this.http.delete(`${this.endpoint}/${id}`).subscribe();
+  }
 
 
 
