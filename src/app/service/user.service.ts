@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { User } from '../model/user';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {User} from '../model/user';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,8 @@ export class UserService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+  }
 
   /**
    * Get all users from the database.
@@ -40,17 +41,20 @@ export class UserService {
   }
 
 
-
   /**
    * Create a user in the database.
    * The method is: this.http.post
    */
-
+  create(user: User): Observable<User> {
+    return this.http.post<User>(`${this.endpoint}`, user);
+  }
 
 
   /**
    * Update a user in the database.
    * The method is: this.http.patch
    */
-
+  update(user: User): Observable<User> {
+    return this.http.patch<User>(`${this.endpoint}/${user.id}`, user)
+  }
 }

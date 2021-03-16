@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import { filter} from "rxjs/operators";
+import { filter, map} from "rxjs/operators";
 import {User} from 'src/app/model/user';
 import {UserService} from 'src/app/service/user.service';
 
@@ -11,9 +11,11 @@ import {UserService} from 'src/app/service/user.service';
 })
 export class UserListComponent implements OnInit {
 
-  users$: Observable<User[]> = this.userService.getAll();
+  users$: Observable<User[]> = this.userService.getAll().subscribe(x => {
+    this.users = x; console.log(x[0]); }
+  );
   filter!: string;
-
+  users!: User[];
   // listfilter: string;
   // get filter(): string{
   //   return this.filter;
@@ -27,6 +29,7 @@ export class UserListComponent implements OnInit {
   //   filter_by = filter_by.toLocaleLowerCase();
   //   return this.users$.filter
   // }
+
 
 
 

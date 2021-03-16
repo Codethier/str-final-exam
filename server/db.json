@@ -18,8 +18,8 @@
       "id": 3,
       "name": "Marius Beddows",
       "email": "mbeddows2@topsy.com",
-      "address": "5 Kennedy Drive",
-      "active": false
+      "address": "",
+      "active": true
     },
     {
       "id": 4,
@@ -37,9 +37,9 @@
     },
     {
       "id": 6,
-      "name": "Catherin Hammatt",
-      "email": "chammatt5@w3.org",
-      "address": "64923 Butterfield Parkway",
+      "name": "Catherin Hammatt is edited",
+      "email": "chammatt5@w3.org is edited",
+      "address": "helo?",
       "active": false
     },
     {

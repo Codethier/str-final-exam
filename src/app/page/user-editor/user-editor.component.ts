@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { User } from 'src/app/model/user';
-import { UserService } from 'src/app/service/user.service';
+import {Component, OnInit} from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {Observable, of} from 'rxjs';
+import {switchMap} from 'rxjs/operators';
+import {User} from 'src/app/model/user';
+import {UserService} from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-user-editor',
@@ -20,7 +20,7 @@ export class UserEditorComponent implements OnInit {
    * 2. If the params.id isn't 0: a user from the database based on its id.
    */
   user$: Observable<User> = this.activatedRoute.params.pipe(
-    switchMap( params => {
+    switchMap(params => {
       if (Number(params.id) === 0) {
         return of(new User());
       }
@@ -32,9 +32,20 @@ export class UserEditorComponent implements OnInit {
   constructor(
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
   }
 
+  form_submit(id: number, name: string, email: string, address: string, active: boolean): void {
+    const patch_user = new User();
+    patch_user.id = id;
+    patch_user.active = active;
+    patch_user.email = email;
+    patch_user.name = name;
+    patch_user.address = address;
+    // console.log(patch_user)
+    this.userService.update(id, patch_user);
+  }
 }
