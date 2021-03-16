@@ -13,8 +13,8 @@ export class UserListComponent implements OnInit {
 
   users$: Observable<User[]> = this.userService.getAll();
   sort_mem: string = '';
-  filterKey: string = 'name';
-  phrase: string = '';
+  filter_key: string = 'name';
+  search: string = '';
   filter!: string;
   // listfilter: string;
   // get filter(): string{
@@ -44,7 +44,7 @@ export class UserListComponent implements OnInit {
   }
 
   delete_this_user(id: number): void {
-    alert("Biztos torolni szeretne?");
+    alert("Sure you wanna do this?");
     this.userService.delete(id).subscribe(() => this.users$ = this.userService.getAll());
   }
 

@@ -11,7 +11,7 @@
             </span>
           </div>
           <!--         {[Pycharm v2020.x.x +]} * ignore labels for * -->
-          <input [(ngModel)]="phrase" type="text" class="form-control" placeholder="search me!">
+          <input [(ngModel)]="search" type="text" class="form-control" placeholder="search me!">
         </div>
       </div>
     </div>
@@ -34,7 +34,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of (users$ | async)! | filter: filterKey : phrase | sorter: sort_mem">
+        <tr *ngFor="let user of (users$ | async)! | filter: filter_key : phrase | sorter: sort_mem">
           <!--          async makes temp variable that gets change detected?-->
           <td>{{ user.id }}</td>
           <td>{{ user.name }}</td>
