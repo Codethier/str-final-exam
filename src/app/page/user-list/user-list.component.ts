@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import { filter, map} from "rxjs/operators";
+import {filter, map} from "rxjs/operators";
 import {User} from 'src/app/model/user';
 import {UserService} from 'src/app/service/user.service';
 
@@ -11,11 +11,11 @@ import {UserService} from 'src/app/service/user.service';
 })
 export class UserListComponent implements OnInit {
 
-  users$: Observable<User[]> = this.userService.getAll().subscribe(x => {
-    this.users = x; console.log(x[0]); }
-  );
+  users$: Observable<User[]> = this.userService.getAll();
+  sort_mem: string = '';
+  filterKey: string = 'name';
+  phrase: string = '';
   filter!: string;
-  users!: User[];
   // listfilter: string;
   // get filter(): string{
   //   return this.filter;
@@ -31,8 +31,6 @@ export class UserListComponent implements OnInit {
   // }
 
 
-
-
   constructor(
     private userService: UserService,
   ) {
@@ -41,9 +39,13 @@ export class UserListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  on_column_select(key: string): void {
+    this.sort_mem = key;
+  }
+
   delete_this_user(id: number): void {
     alert("Biztos torolni szeretne?");
-    this.userService.delete(id);
+    this.userService.delete(id).subscribe(() => this.users$ = this.userService.getAll());
   }
 
 

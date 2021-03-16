@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './common/navbar/navbar.component';
 import { UserListComponent } from './page/user-list/user-list.component';
 import { UserEditorComponent } from './page/user-editor/user-editor.component';
+import { FilterPipe } from './filter.pipe';
+import { SorterPipe } from './sorter.pipe';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,8 @@ import { UserEditorComponent } from './page/user-editor/user-editor.component';
     NavbarComponent,
     UserListComponent,
     UserEditorComponent,
+    FilterPipe,
+    SorterPipe
   ],
   imports: [
     BrowserModule,

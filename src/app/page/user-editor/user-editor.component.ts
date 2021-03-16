@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, of} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
 import {User} from 'src/app/model/user';
 import {UserService} from 'src/app/service/user.service';
+
 
 @Component({
   selector: 'app-user-editor',
@@ -29,23 +30,30 @@ export class UserEditorComponent implements OnInit {
     })
   );
 
+
   constructor(
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {
   }
 
-  ngOnInit(): void {
+  ngOnInit()
+    :
+    void {
   }
 
-  form_submit(id: number, name: string, email: string, address: string, active: boolean): void {
-    const patch_user = new User();
-    patch_user.id = id;
-    patch_user.active = active;
-    patch_user.email = email;
-    patch_user.name = name;
-    patch_user.address = address;
-    // console.log(patch_user)
-    this.userService.update(id, patch_user);
+  on_update(form: NgForm, user: User):
+    void {
+    if (user.id === 0
+    ) {
+      this.userService.create(user).subscribe(
+        () => this.router.navigate([''])
+      );
+    } else {
+      this.userService.update(user).subscribe(
+        () => this.router.navigate([''])
+      );
+    }
   }
 }

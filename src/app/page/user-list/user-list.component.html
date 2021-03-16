@@ -1,28 +1,45 @@
 <div class="row">
-  <div>
-    <label>
-      <input [(ngModel)]="filter" type="text">
-    </label>
-    <span>showing results for {{filter}}</span>
-  </div>
   <div class="col-12 mt-2">
-    <h2>User List</h2>
+    <h2>Users List</h2>
+
+    <div class="row mb-5">
+      <div class="col-8 offset-2">
+        <div class="input-group mb-1">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">
+              <i class="fa fa-search"></i>
+            </span>
+          </div>
+          <!--         {[Pycharm v2020.x.x +]} * ignore labels for * -->
+          <input [(ngModel)]="phrase" type="text" class="form-control" placeholder="search me!">
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-dark btn-block mb-5" [routerLink]="['user/'+0]">
+      <i class="fa fa-plus"></i>
+      Add a new user to db
+    </button>
+
+
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>#</th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Address</th>
-          <th>Active</th>
+          <th (click)="on_column_select('id')">#</th>
+          <th (click)="on_column_select('name')">Name</th>
+          <th (click)="on_column_select('email')">Email</th>
+          <th (click)="on_column_select('address')">Address</th>
+          <th (click)="on_column_select('active')">Active</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of users">
+        <tr *ngFor="let user of (users$ | async)! | filter: filterKey : phrase | sorter: sort_mem">
+          <!--          async makes temp variable that gets change detected?-->
           <td>{{ user.id }}</td>
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
+          <!--          index error?-->
           <td>{{ user.address }}</td>
           <td>{{ user.active }}</td>
           <td>
@@ -30,7 +47,7 @@
               <button [routerLink]="['user/' + user.id]" class="btn btn-info">
                 <i class="fa fa-pencil"></i>
               </button>
-              <button (click)="delete_this_user(user.id)" class="btn btn-danger">
+              <button class="btn btn-danger" (click)="delete_this_user(user.id)">
                 <i class="fa fa-trash"></i>
               </button>
             </div>
